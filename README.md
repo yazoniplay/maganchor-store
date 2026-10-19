@@ -1,27 +1,29 @@
 # MagAnchor Pro Store
 
-Responsive single-product storefront built with plain HTML, CSS, and JavaScript. No build step or dependencies are required.
+A responsive multi-page storefront built with plain HTML, CSS, and JavaScript. No build step or package dependencies are required.
+
+## Pages and assets
+- `index.html` — home / landing page
+- `shop.html` — product gallery, pack selector, quantity control, and sticky buy box
+- `why.html` — benefits and use cases
+- `faq.html` — product, shipping, returns, and support FAQs
+- `styles.css` — shared responsive design, wave dividers, hover states, and reduced-motion support
+- `app.js` — shared localStorage cart, drawer, variant selection, and gallery controls
 
 ## Preview locally
-Open `index.html` in a browser, or run `python -m http.server 8000` in this folder and visit http://localhost:8000.
+Open `index.html`, or run `python -m http.server 8000` in this folder and visit http://localhost:8000.
 
 ## Deploy with GitHub Pages
 1. Open repository **Settings → Pages**.
-2. Under Build and deployment, select **Deploy from a branch**.
-3. Select `main` and `/ (root)`, then save.
+2. Under Build and deployment, choose **GitHub Actions** if a Pages workflow is configured, or select `main` and `/(root)` for branch deployment.
+3. Visit the Actions tab to verify the deployment completes.
 
-## Before launch
-- Replace `CHECKOUT_URL` in the script in `index.html` with your real Stripe Payment Link.
-- Important: this frontend cart does not send item variants or quantities to Stripe. A single Payment Link needs to be configured for the intended product, or replace it with a proper Checkout Session integration to support dynamic cart contents.
-- Replace sample review placeholders with real, permissioned customer feedback. They are clearly labeled as illustrative and are not verified testimonials.
-- Confirm supplier product specifications, magnet compatibility, packaging, shipping timelines, returns, taxes, contact details, and privacy policy.
-- Test checkout and the complete order flow before accepting real orders.
+## Important before accepting orders
+- The cart is a front-end demo using browser localStorage. The checkout button intentionally does not take payments yet. Connect a verified Stripe Checkout Session or equivalent backend; a static Payment Link alone will not automatically carry the cart's chosen variant and quantity.
+- Confirm product specifications, bundle contents, surface compatibility, pricing, fulfillment, shipping times, tax handling, returns, and privacy policy.
+- Replace the support email placeholder in the footer with a monitored inbox.
+- The product page includes an Unsplash cable-management photo plus Unsplash desk/workspace photography. These are illustrative editorial photos, not verified photos of the exact MagAnchor Pro item. Replace them with your supplier's actual product images before launch so customers see the item they will receive.
+- Do not publish invented testimonials or unverified performance claims.
 
-## Included
-- Responsive premium-style product landing page, product illustration, benefits, FAQ, and mobile purchase bar.
-- 1-pack and 2-pack bundle selector with quantity controls.
-- Slide-out cart with quantity editing, removal, subtotal, and localStorage persistence.
-- Checkout placeholder guard: payment navigation is intentionally disabled until a valid Stripe Payment Link is added.
-
-## Production limitations
-This is a storefront frontend, not a full ecommerce backend. It is not connected to inventory, fulfillment, analytics, or a database.
+## Technical notes
+The cart state is shared between pages through localStorage. The drawer opens when an item is added, supports quantity changes/removal, and updates the subtotal. Product prices in the front-end are display values only and must be validated by a real checkout backend.
